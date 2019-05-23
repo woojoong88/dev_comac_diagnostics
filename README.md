@@ -94,7 +94,7 @@ PM$ docker exec -it traffic bash
 1. Access each container
 2. Input `ifconfig` command
 
-## Configuration
+## SPGW-C/U configuration (for demonstration)
 ### config/ngic\_config/interface.cfg in this repository
 ```
 21: dp_comm_ip = <IP address of DP container connected in `brspgw` bridge>
@@ -118,7 +118,7 @@ PM$ docker exec -it traffic bash
 8: SGI_GW_IP=<IP address of traffic container connected in `brsgi` bridge>
 ```
 
-### config/ngic\_config/static\_arp.cfg
+### config/ngic\_config/static\_arp.cfg in this repository
 ```
 ...
 [sgi]
