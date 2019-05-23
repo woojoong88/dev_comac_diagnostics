@@ -12,11 +12,11 @@ docker network create --driver=bridge --subnet=192.168.105.0/24 --ip-range=192.1
 docker network create --driver=bridge --subnet=192.168.106.0/24 --ip-range=192.168.106.0/24 --gateway=192.168.106.254 brsgi
 
 echo "run Docker images"
-docker run -t -d --name cp woojoong/omec-spgwc:v1-debug-noconf bash
+docker run -t -d --name cp -v $(pwd)/config/ngic_config:/opt/ngic-rtc/config woojoong/omec-spgwc:v1-debug-noconf bash
 docker network connect brs11 cp
 docker network connect brspgw cp
 
-docker run -t -d --name dp --cap-add IPC_LOCK --cap-add NET_ADMIN --ulimit=memlock=-1 woojoong/omec-spgwu:v1-debug-noconf bash
+docker run -t -d --name dp --cap-add IPC_LOCK --cap-add NET_ADMIN --ulimit=memlock=-1 -v $(pwd)/config/ngic_config:/opt/ngic-rtc/config woojoong/omec-spgwu:v1-debug-noconf bash
 docker network connect brs1u dp
 docker network connect brsgi dp
 docker network connect brspgw dp
