@@ -1,12 +1,12 @@
-# COMAC Diagnostics Development Kit (CDDK)
+# COMAC VNFs Diagnostics Kit (CVDK)
 
-CDDK is the diagnostics for VNF containers in COMAC.
+CVDK is the diagnostics for VNF containers in COMAC.
 
 This repository is NOT an official ONF repository.
 
-The official CDDK code will be merged into the official ONF repository, hopefully.
+The official CVDK code will be merged into the official ONF repository, hopefully.
 
-CDDK can be used to check whether all VNF containers in COMAC is set correctly or not (i.e., CI/CD).
+CVDK can be used to check whether all VNF containers in COMAC is set correctly or not (i.e., CI/CD).
 
 All scripts are developed by Woojoong Kim from Open Networking Foundation.
 
@@ -15,13 +15,13 @@ Current version (v1.0) is cut on May 23rd, 2019.
 ## Introduction
 COMAC is one of the reference designs for 5G networks, which will be release officially sooner or later.
 
-Now, initial version of CDDK (CDDK v1.0) is ready, which checks SPGW-U and SPGW-C by using TCP Replay.
+Now, initial version of CVDK (CVDK v1.0) is ready, which checks SPGW-U and SPGW-C by using TCP Replay.
 
-The current CDDK instantiates the container *traffic* the traffic generator (this is the temporal name).
+The current CVDK instantiates the container *traffic* the traffic generator (this is the temporal name).
 
-With the script in the CDDK, the container *traffic* is easily deployed.
+With the script in the CVDK, the container *traffic* is easily deployed.
 
-For demonstration, the current CDDK includes the script to set SPGW-U and SPGW-C.
+For demonstration, the current CVDK includes the script to set SPGW-U and SPGW-C.
 
 ## Specification
 * OS: Ubuntu 18.04 (fin to test)
@@ -45,7 +45,7 @@ PM$ ./set_env.sh
 ```
 PM$ ./get_ngic_images.sh
 ```
-**Note:** If you don't need to set up SPGW-C and SPGW-U with CDDK, skip this step.
+**Note:** If you don't need to set up SPGW-C and SPGW-U with CVDK, skip this step.
 
 3. Pull/run traffic generator image
 ```
