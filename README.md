@@ -168,15 +168,19 @@ cp_container# ./run.sh
 
 ### How to generate traffic for each LTE interface?
 ```
-root# tcpreplay --pps=200 -i $S11_IFACE tosend-s11.pcap # to generate S11 traffic
-root# tcpreplay --pps=2000 -i $S1U_IFACE tosend-s1u.pcap # to generate S1U traffic
-root# tcpreplay --pps=2000 -i $SGI_IFACE tosend-sgi.pcap # to generate SGI traffic
+traffic_container# tcpreplay --pps=200 -i $S11_IFACE tosend-s11.pcap # to generate S11 traffic
+traffic_container# tcpreplay --pps=2000 -i $S1U_IFACE tosend-s1u.pcap # to generate S1U traffic
+traffic_container# tcpreplay --pps=2000 -i $SGI_IFACE tosend-sgi.pcap # to generate SGI traffic
 ```
 where
 * $S11\_IFACE means the network interface name (e.g., eth1) for S11 network in *traffic*
 * $S1U\_IFACE means the network interface name (e.g., eth1) for S1U network in *traffic*
 * $SGI\_IFACE means the network interface name (e.g., eth1) for SGI network in *traffic*
 
+### How to clean up? (for demonstration)
+```
+PM$ ./reset.sh
+```
 
 ## Release information
 * Version 1.0 - Diagnostics for SPGW-C and SPGW-U with TCP Replay.
