@@ -177,7 +177,116 @@ where
 * $S1U\_IFACE means the network interface name (e.g., eth1) for S1U network in *traffic*
 * $SGI\_IFACE means the network interface name (e.g., eth1) for SGI network in *traffic*
 
-### How to clean up? (for demonstration)
+## Diagnostics
+### For S11 network
+After run *tcpreplay* for S11, SPGW-C is good if you can see below outputs:
+
+1. Output in *traffic*
+```
+processing file: tosend-s11.pcap
+Actual: 2000 packets (429000 bytes) sent in 10.09 seconds.              Rated: 42517.3 bps, 0.32 Mbps, 198.22 pps
+Statistics for network device: eth1
+        Attempted packets:         2000
+        Successful packets:        2000
+        Failed packets:            0
+        Retried packets (ENOBUFS): 0
+        Retried packets (EAGAIN):  0
+```
+
+2. Output in SPGW-C
+```
+...
+  106     2000     1000      193       70     1000        0        0        0        0        0        0        0        0        0
+  107     2000     1000        0        0     1000        0        0        0        0        0        0        0        0        0
+  108     2000     1000        0        0     1000        0        0        0        0        0        0        0        0        0
+...
+```
+The second, third, and sixth column values should be around 2000, 1000, and 1000, respectively.
+
+Note that you can see so many error messages below:
+```
+main.c::control_plane()::Error
+        case SPGWC:
+        process_modify_bearer_request GTP_MODIFY_BEARER_REQ: (64) GTPV2C_CAUSE_CONTEXT_NOT_FOUND
+main.c::control_plane()::Error
+        case SPGWC:
+        process_modify_bearer_request GTP_MODIFY_BEARER_REQ: (64) GTPV2C_CAUSE_CONTEXT_NOT_FOUND
+```
+You can ignore it only for the diagnostics.
+
+### For S1U network
+
+After run *tcpreplay* command for S1U and SGi networks, SPGW-U is good if you can see below outputs:
+
+1. Output in *traffic*
+```
+processing file: tosend-s1u.pcap
+Actual: 6600 packets (9124100 bytes) sent in 3.39 seconds.              Rated: 2691475.0 bps, 20.53 Mbps, 1946.90 pps
+Statistics for network device: eth2
+        Attempted packets:         6600
+        Successful packets:        6600
+        Failed packets:            0
+        Retried packets (ENOBUFS): 0
+        Retried packets (EAGAIN):  0
+```
+
+2. Output in SPGW-U
+```
+##NGCORE_SHRINK(RTC)
+                  UPLINK                            ||                 DOWNLINK
+IfMisPKTS    IfPKTS     UL-RX     UL-TX    UL-DFF   || IfMisPKTS    IfPKTS     DL-RX     DL-TX    DL-DFF
+        0         0         0         0         0   ||         0         0         0         0         0
+        0      6609      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         0         0         0         0
+```
+Note that UL-RX and UL-DFF should be the same number of packets which *traffic* sent (see output in *traffic*; you can see "Successful packets").
+
+In this example, UL-RX and UL-DFF are 6600, while "Successful packets" is also 6600 in *traffic* output.
+
+### For SGi network
+
+After run *tcpreplay* command for S1U and SGi networks, SPGW-U is good if you can see below outputs:
+
+1. Output in *traffic*
+```
+processing file: tosend-sgi.pcap
+Actual: 6765 packets (9114910 bytes) sent in 3.47 seconds.              Rated: 2626775.2 bps, 20.04 Mbps, 1949.57 pps
+Statistics for network device: eth3
+        Attempted packets:         6765
+        Successful packets:        6765
+        Failed packets:            0
+        Retried packets (ENOBUFS): 0
+        Retried packets (EAGAIN):  0
+```
+
+2. Output in SPGW-U
+```
+##NGCORE_SHRINK(RTC)
+                  UPLINK                            ||                 DOWNLINK
+IfMisPKTS    IfPKTS     UL-RX     UL-TX    UL-DFF   || IfMisPKTS    IfPKTS     DL-RX     DL-TX    DL-DFF
+        0         0         0         0         0   ||         0         0         0         0         0
+        0      6609      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         0         0         0         0
+        0      6611      6600         0      6600   ||         0         8         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+        0      6611      6600         0      6600   ||         0      6765         0         0         0
+```
+Note that IFPKTS in Downlink should be the same number of packets which *traffic* sent (see output in *traffic*; you can see "Successful packets").
+
+In this example, those are 6765.
+
+## How to clean up? (for demonstration)
 ```
 PM$ ./reset.sh
 ```
