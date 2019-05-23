@@ -129,26 +129,16 @@ PM$ docker exec -it traffic bash
 ...
 ```
 
-### How to generate traffic for each LTE interface?
-```
-root# tcpreplay --pps=200 -i $S11_IFACE tosend-s11.pcap # to generate S11 traffic
-root# tcpreplay --pps=2000 -i $S1U_IFACE tosend-s1u.pcap # to generate S1U traffic
-root# tcpreplay --pps=2000 -i $SGI_IFACE tosend-sgi.pcap # to generate SGI traffic
-```
-
-## Release information
-* Version 1.0 - Diagnostics for SPGW-C and SPGW-U with TCP Replay.1
-
 ## Generate pcap files to run `TCPReplay`
 
 First, access to traffic container.
 Then, input the following command:
 ```
-root# ./rewrite_pcaps.py enb.s1u.ngic spgw.s11.ngic spgw.s1u.ngic spgw.sgi.ngic
+root# ./rewrite_pcaps.py traffic.s1u.ngic spgw.s11.ngic spgw.s1u.ngic spgw.sgi.ngic
 ```
 where
 ```
-enb.s1u.ngic: IP address of traffic container connected in `brs1u` bridge
+traffic.s1u.ngic: IP address of traffic container connected in `brs1u` bridge
 spgw.s11.ngic: IP address of CP container connected in `brs11` bridge
 spgw.s1u.ngic: IP address of DP container connected in `brs1u` bridge
 spgw.sgi.ngic: IP address of DP container connected in `brsgi` bridge
@@ -161,7 +151,7 @@ There is the sequence to run SPGW side by side *traffic*, which is DP -> CP -> *
 
 Before run everything, you need to double-check all configurations.
 
-### How to run DP?
+### How to run DP? (for demonstration)
 ```
 dp_container# cd /opt/ngic-rtc
 dp_container# ./setup_af_ifaces.sh
@@ -169,7 +159,7 @@ dp_container# cd dp
 dp_container# ./vdev.sh
 ```
 
-### How to run CP?
+### How to run CP? (for demonstration)
 ```
 cp_container# cd /opt/ngic-rtc/cp
 cp_container# ./run.sh
@@ -182,6 +172,11 @@ root# tcpreplay --pps=200 -i $S11_IFACE tosend-s11.pcap # to generate S11 traffi
 root# tcpreplay --pps=2000 -i $S1U_IFACE tosend-s1u.pcap # to generate S1U traffic
 root# tcpreplay --pps=2000 -i $SGI_IFACE tosend-sgi.pcap # to generate SGI traffic
 ```
+where
+* $S11\_IFACE means the network interface name (e.g., eth1) for S11 network in *traffic*
+* $S1U\_IFACE means the network interface name (e.g., eth1) for S1U network in *traffic*
+* $SGI\_IFACE means the network interface name (e.g., eth1) for SGI network in *traffic*
+
 
 ## Release information
 * Version 1.0 - Diagnostics for SPGW-C and SPGW-U with TCP Replay.
