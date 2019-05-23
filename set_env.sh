@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-echo "Set environment for K-ONE M-CORD Lite version"
+echo "Set environment"
 
 echo "Start to install prerequisites"
 sudo apt update
