@@ -1,6 +1,5 @@
 # COMAC Diagnostics Development Kit (CDDK)
 
-- - -
 CDDK is the diagnostics for VNF containers in COMAC.
 
 This repository is NOT an official ONF repository.
@@ -14,7 +13,6 @@ All scripts are developed by Woojoong Kim from Open Networking Foundation.
 Current version (v1.0) is cut on May 23rd, 2019.
 
 ## Introduction
-- - -
 COMAC is one of the reference designs for 5G networks, which will be release officially sooner or later.
 
 Now, initial version of CDDK (CDDK v1.0) is ready, which checks SPGW-U and SPGW-C by using TCP Replay.
@@ -26,14 +24,12 @@ With the script in the CDDK, the container *traffic* is easily deployed.
 For demonstration, the current CDDK includes the script to set SPGW-U and SPGW-C.
 
 ## Specification
-- - -
 * OS: Ubuntu 18.04 (fin to test)
 * CPU: Intel CPU (More than Haswell CPU microarchitecture), at least 20 cores (due to the SPGW-C/U images)
 * Memory: 32GB (due to the SPGW-C/U images)
 * Disk: around 10GB (due to the SPGW-C/U images)
 
 ## Setup environment (for demonstration)
-- - -
 0. (Optional) Make a disk storage when using CloudLab
 ```
 PM$ ./cloudlab-disk-setup.sh
@@ -72,7 +68,6 @@ Everything depands on your own environment.
 Of course, if you set up everything through 1 -> 2 -> 3, then no need the above manual steps.
 
 ## Information (for demonstration)
-- - -
 ### Network information
 * brspgw: 192.168.104.0/24
 * brs11: 192.168.103.0/24
