@@ -2,8 +2,8 @@
 
 echo "get NGIC images which are SPGW-C and SPGW-U"
 docker login
-docker pull woojoong/kone-cp:lite
-docker pull woojoong/kone-dp:lite
+docker pull woojoong/omec-spgwc:v1-debug-noconf
+docker pull woojoong/omec-spgwu:v1-debug-noconf
 
 echo "make networks"
 docker network create --driver=bridge --subnet=192.168.103.0/24 --ip-range=192.168.103.0/24 --gateway=192.168.103.254 brs11
